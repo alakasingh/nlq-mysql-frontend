@@ -13,24 +13,30 @@ export interface QueryResult {
     };
 }
 
-const API_BASE_URL = 'http://localhost:8000/api'; // Standard FastAPI port
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 export const api = {
     connect: async (config: DatabaseConfig) => {
-        const response = await fetch(`${API_BASE_URL}/connect`, {
+        const response = await fetch(`${API_BASE_URL}/api/connect`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(config),
         });
+
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.detail || 'Failed to connect to database');
         }
+
         return response.json();
     },
 
-    executeQuery: async (question: string, db_schema: any, db_credentials: DatabaseConfig) => {
-        const response = await fetch(`${API_BASE_URL}/query`, {
+    executeQuery: async (
+        question: string,
+        db_schema: any,
+        db_credentials: DatabaseConfig
+    ) => {
+        const response = await fetch(`${API_BASE_URL}/api/query`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -39,10 +45,12 @@ export const api = {
                 db_credentials
             }),
         });
+
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.detail || 'Query execution failed');
         }
+
         return response.json() as Promise<QueryResult>;
     },
 };
