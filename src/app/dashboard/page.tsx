@@ -9,6 +9,9 @@ import QueryHistory from '@/components/QueryHistory';
 import SettingsView from '@/components/Settings';
 import { api, DatabaseConfig, QueryResult } from '@/lib/api';
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { auth } from '@/lib/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 
 import {
   AlertCircle,
@@ -33,6 +36,8 @@ interface HistoryItem {
 }
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -51,6 +56,18 @@ export default function DashboardPage() {
     const savedHistory = localStorage.getItem('nlq_query_history');
     if (savedHistory) setHistory(JSON.parse(savedHistory));
   }, []);
+
+  // Check auth
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push('/auth');
+      } else {
+        setIsAuthChecking(false);
+      }
+    });
+    return () => unsubscribe();
+  }, [router]);
 
   // Handle responsive breakpoints
   useEffect(() => {
@@ -137,8 +154,8 @@ export default function DashboardPage() {
     display: 'flex',
     height: '100vh',
     overflow: 'hidden',
-    background: 'linear-gradient(to bottom right, #020617, #0f172a, #020617)',
-    color: 'white',
+    background: 'linear-gradient(to bottom right, #f8fafc, #ffffff, #f1f5f9)',
+    color: '#0f172a',
     position: 'relative',
     fontFamily: "'Inter', system-ui, sans-serif"
   };
@@ -161,21 +178,21 @@ export default function DashboardPage() {
   const headerStyle: React.CSSProperties = {
     position: 'sticky',
     top: 0,
-    background: 'linear-gradient(180deg, #020617, #020617)',
+    background: 'rgba(255, 255, 255, 0.9)',
     backdropFilter: 'blur(10px)',
     zIndex: 10,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: isMobile ? '1rem' : isTablet ? '1rem 1.5rem' : '1rem 2rem',
-    borderBottom: '1px solid rgba(255,255,255,0.05)',
+    borderBottom: '1px solid rgba(203, 213, 225, 0.5)',
     gap: '1rem'
   };
 
   const sidebarStyle: React.CSSProperties = {
     width: isMobile ? (isMobileMenuOpen ? '100%' : '0') : isCollapsed ? '70px' : '240px',
     height: '100vh',
-    background: 'linear-gradient(180deg, #020617, #020617)',
+    background: 'rgba(248, 250, 252, 1)',
     padding: isMobile ? (isMobileMenuOpen ? '1rem' : '0') : '1.5rem 1rem',
     display: 'flex',
     flexDirection: 'column',
@@ -185,8 +202,8 @@ export default function DashboardPage() {
     top: 0,
     left: 0,
     zIndex: isMobile ? 100 : 'auto',
-    borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.05)',
-    boxShadow: isMobile && isMobileMenuOpen ? '2px 0 10px rgba(0,0,0,0.5)' : 'none'
+    borderRight: isMobile ? 'none' : '1px solid rgba(203, 213, 225, 0.5)',
+    boxShadow: isMobile && isMobileMenuOpen ? '2px 0 10px rgba(0,0,0,0.1)' : 'none'
   };
 
   const overlayStyle: React.CSSProperties = {
@@ -202,10 +219,10 @@ export default function DashboardPage() {
   };
 
   const menuButton = (active: boolean): React.CSSProperties => ({
-    background: active ? 'rgba(0,242,255,0.1)' : 'transparent',
-    border: active ? '1px solid rgba(0,242,255,0.2)' : '1px solid transparent',
+    background: active ? 'rgba(37, 99, 235, 0.1)' : 'transparent',
+    border: active ? '1px solid rgba(37, 99, 235, 0.2)' : '1px solid transparent',
     borderRadius: '12px',
-    color: active ? '#00f2ff' : '#94a3b8',
+    color: active ? '#1e3a8a' : '#475569',
     padding: isMobile ? '1rem' : '0.75rem',
     display: 'flex',
     alignItems: 'center',
@@ -222,7 +239,7 @@ export default function DashboardPage() {
   const collapseBtnStyle: React.CSSProperties = {
     background: 'transparent',
     border: 'none',
-    color: '#94a3b8',
+    color: '#475569',
     cursor: 'pointer',
     marginBottom: '2rem',
     padding: '0.5rem',
@@ -232,7 +249,7 @@ export default function DashboardPage() {
   const mobileMenuBtnStyle: React.CSSProperties = {
     background: 'transparent',
     border: 'none',
-    color: '#fff',
+    color: '#0f172a',
     cursor: 'pointer',
     padding: '0.5rem',
     display: isMobile && dbCredentials ? 'flex' : 'none',
@@ -249,12 +266,13 @@ export default function DashboardPage() {
   };
 
   const connectionCardStyle: React.CSSProperties = {
-    background: 'rgba(255,255,255,0.05)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    background: 'rgba(241, 245, 249, 1)',
+    border: '1px solid rgba(203, 213, 225, 0.5)',
     padding: isMobile ? '0.75rem 1rem' : '0.5rem 1rem',
     borderRadius: '12px',
     fontSize: isMobile ? '0.8125rem' : '0.75rem',
     fontWeight: 600,
+    color: '#0f172a',
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
@@ -262,6 +280,22 @@ export default function DashboardPage() {
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   };
+
+  if (isAuthChecking) {
+    return (
+      <div style={{ display: 'flex', height: '100vh', background: '#f8fafc', alignItems: 'center', justifyContent: 'center', color: '#0f172a' }}>
+        <Loader2 size={32} style={{ animation: 'spin 1s linear infinite' }} color="#1e3a8a" />
+        <style>
+          {`
+            @keyframes spin {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+          `}
+        </style>
+      </div>
+    );
+  }
 
   return (
     <div style={containerStyle}>
@@ -338,14 +372,14 @@ export default function DashboardPage() {
           <a href="/" style={{ textDecoration: 'none' }}>
           <div style={logoStyle} >
             
-            <Cpu size={isMobile ? 28 : 24} color="#00f2ff" />
+            <img src="/db.png" alt="OpenDB Logo" height={isMobile ? 28 : 24} width={isMobile ? 28 : 24} style={{ display: 'block' }} />
             {(!isCollapsed || isMobile) && (
               <span style={{
                 fontWeight: 800,
                 fontSize: isMobile ? '1.375rem' : '1.2rem',
-                color: 'white'
+                color: '#0f172a'
               }}>
-                NLQ MySQL
+                OpenDB
               </span>
             )}
           </div>
@@ -442,7 +476,7 @@ export default function DashboardPage() {
 
               {dbCredentials && (
                 <div style={connectionCardStyle}>
-                  <Server size={isMobile ? 14 : 16} color="#00f2ff" />
+                  <Server size={isMobile ? 14 : 16} color="#2563eb" />
                   {!isMobile && <span>{dbCredentials.host}</span>}
                 </div>
               )}

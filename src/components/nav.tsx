@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Cpu, Menu, X } from "lucide-react";
+import { Menu, X, Cpu } from "lucide-react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -11,17 +11,16 @@ const Navbar = () => {
         top: 0,
         width: "100%",
         zIndex: 50,
-        background: "transparent",
-backdropFilter: "blur(12px)",
-        
-
+        background: "rgba(255, 255, 255, 0.8)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(203, 213, 225, 0.5)",
       }}
     >
       <div
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "1.25rem 1.5rem",
+          padding: "0.25rem 0.5rem",
         }}
       >
         {/* Top Row */}
@@ -33,39 +32,26 @@ backdropFilter: "blur(12px)",
           }}
         >
           {/* Logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            <div
-              style={{
-                background: "linear-gradient(to bottom right, #06b6d4, #7c3aed)",
-                padding: "0.6rem",
-                borderRadius: "0.75rem",
-                boxShadow: "0 8px 30px rgba(6,182,212,0.45)",
-              }}
-            >
-              <Cpu size={22} color="white" />
-            </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.01rem" }}>
+            <img src="/db.png" alt="OpenDB Logo" height={52} width={52} style={{ display: 'block' }} />
 
             <span
               style={{
                 fontWeight: 900,
-                fontSize: "1.15rem",
-                background: "linear-gradient(to right, white, #a5f3fc)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                fontSize: "1.25rem",
+                color: "#0a173a",
               }}
             >
-              NLQ MySQL
+              OpenDB
             </span>
           </div>
 
           {/* Desktop Links */}
           <div className="desktop-nav">
-            {["Product", "Features", "Docs"].map((item) => (
-              <a key={item} href="#product">
-                {item}
-              </a>
-            ))}
-            <a href="/dashboard" className="cta">
+            <a href="/auth" className="">
+              Register
+            </a>
+            <a href="/auth" className="cta">
               Sign In
             </a>
           </div>
@@ -83,12 +69,8 @@ backdropFilter: "blur(12px)",
         {/* Mobile Menu */}
         {open && (
           <div className="mobile-menu">
-            {["Product", "Features", "Docs"].map((item) => (
-              <a key={item} href="#product">
-                {item}
-              </a>
-            ))}
-            <a href="/dashboard" className="cta">
+           
+            <a href="/auth" className="cta" style={{ textAlign: "center" }}>
               Sign In
             </a>
           </div>
@@ -107,7 +89,7 @@ backdropFilter: "blur(12px)",
           }
 
           .desktop-nav a {
-            color: white;
+            color: #0f172a;
             text-decoration: none;
             position: relative;
           }
@@ -117,7 +99,7 @@ backdropFilter: "blur(12px)",
             position: absolute;
             width: 0;
             height: 2px;
-            background: linear-gradient(to right, #06b6d4, #7c3aed);
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
             left: 0;
             bottom: -6px;
             transition: width 0.3s;
@@ -130,16 +112,27 @@ backdropFilter: "blur(12px)",
           .cta {
             padding: 0.55rem 1.4rem;
             border-radius: 9999px;
-            background: linear-gradient(to right, #06b6d4, #7c3aed);
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
             color: white !important;
-            box-shadow: 0 10px 30px rgba(6,182,212,0.45);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+
+          .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+          }
+
+          .cta::after {
+            display: none !important;
           }
 
           .mobile-toggle {
             display: none;
             background: none;
             border: none;
-            color: white;
+            color: #0f172a;
             cursor: pointer;
           }
 
@@ -148,18 +141,25 @@ backdropFilter: "blur(12px)",
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            background: rgba(15,23,42,0.95);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(203, 213, 225, 0.5);
             border-radius: 1rem;
             padding: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
           }
 
           .mobile-menu a {
-            color: white;
+            color: #0f172a;
             font-weight: 600;
             text-decoration: none;
             padding: 0.75rem;
             border-radius: 0.75rem;
-            background: rgba(255,255,255,0.06);
+            background: rgba(241, 245, 249, 1);
+            transition: background 0.2s;
+          }
+
+          .mobile-menu a:hover {
+             background: rgba(226, 232, 240, 1);
           }
 
           @media (max-width: 768px) {

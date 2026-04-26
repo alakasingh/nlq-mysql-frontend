@@ -28,7 +28,7 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
         }
     ]);
     const [isMobile, setIsMobile] = useState(false);
-    
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,16 +80,16 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
             height: '100%',
             maxHeight: '70vh',
             minHeight: '500px',
-            background: 'rgba(255, 255, 255, 0.02)',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
+            background: 'rgba(255, 255, 255, 0.9)',
+            border: '1px solid rgba(203, 213, 225, 0.5)',
             borderRadius: isMobile ? '16px' : '24px',
             overflow: 'hidden',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+            boxShadow: '0 10px 40px rgba(0,0,0,0.05)'
         }}>
             {/* Chat Header */}
             <div style={{
-                background: 'rgba(255, 255, 255, 0.03)',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                background: 'rgba(248, 250, 252, 0.9)',
+                borderBottom: '1px solid rgba(203, 213, 225, 0.5)',
                 padding: isMobile ? '1rem 1.25rem' : '1.25rem 1.5rem',
                 backdropFilter: 'blur(10px)',
                 display: 'flex',
@@ -97,27 +97,28 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                 gap: '1rem'
             }}>
                 <div style={{
-                    background: 'linear-gradient(135deg, #00f2ff, #9d00ff)',
+                    background: 'linear-gradient(135deg, #1e3a8a, #3b82f6)',
                     padding: isMobile ? '0.625rem' : '0.75rem',
                     borderRadius: '12px',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 10px rgba(37, 99, 235, 0.3)'
                 }}>
-                    <Sparkles size={isMobile ? 18 : 20} color="#000" />
+                    <Sparkles size={isMobile ? 18 : 20} color="white" />
                 </div>
                 <div>
                     <h3 style={{
                         fontSize: isMobile ? '1rem' : '1.125rem',
                         fontWeight: 800,
-                        color: '#fff',
+                        color: '#0f172a',
                         margin: 0
                     }}>
-                        AI Query Assistant
+                        BI Query Assistant
                     </h3>
                     <p style={{
                         fontSize: isMobile ? '0.6875rem' : '0.75rem',
-                        color: '#94a3b8',
+                        color: '#64748b',
                         margin: 0
                     }}>
                         Ask in plain English • Converts to SQL
@@ -140,33 +141,37 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                         key={message.id}
                         style={{
                             display: 'flex',
-                            justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
+                            width: '100%',
                             alignItems: 'flex-start',
                             gap: isMobile ? '0.625rem' : '0.75rem',
                             flexDirection: message.sender === 'user' ? 'row-reverse' : 'row',
+                            alignSelf: message.sender === 'user' ? 'flex-end' : 'flex-start',
                             animation: 'slideIn 0.3s ease-out'
                         }}
                     >
+
+
                         {/* Avatar */}
                         <div style={{
                             minWidth: isMobile ? '32px' : '36px',
                             height: isMobile ? '32px' : '36px',
                             borderRadius: '50%',
                             background: message.sender === 'user'
-                                ? 'linear-gradient(135deg, #00f2ff, #9d00ff)'
-                                : 'rgba(255, 255, 255, 0.05)',
+                                ? 'linear-gradient(135deg, #1e3a8a, #3b82f6)'
+                                : 'rgba(241, 245, 249, 1)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            border: message.sender === 'assistant' 
-                                ? '1px solid rgba(255, 255, 255, 0.1)' 
+                            border: message.sender === 'assistant'
+                                ? '1px solid rgba(203, 213, 225, 0.5)'
                                 : 'none',
-                            flexShrink: 0
+                            flexShrink: 0,
+                            boxShadow: message.sender === 'user' ? '0 4px 10px rgba(37, 99, 235, 0.2)' : 'none'
                         }}>
                             {message.sender === 'user' ? (
-                                <User size={isMobile ? 16 : 18} color="#000" />
+                                <User size={isMobile ? 16 : 18} color="white" />
                             ) : (
-                                <Bot size={isMobile ? 16 : 18} color="#00f2ff" />
+                                <Bot size={isMobile ? 16 : 18} color="#2563eb" />
                             )}
                         </div>
 
@@ -174,32 +179,32 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                         <div style={{
                             maxWidth: isMobile ? '80%' : '75%',
                             background: message.sender === 'user'
-                                ? 'linear-gradient(135deg, #00f2ff, #9d00ff)'
-                                : 'rgba(255, 255, 255, 0.05)',
+                                ? 'linear-gradient(135deg, #1e3a8a, #3b82f6)'
+                                : 'rgba(241, 245, 249, 1)',
                             borderRadius: message.sender === 'user'
                                 ? '18px 18px 4px 18px'
                                 : '18px 18px 18px 4px',
                             padding: isMobile ? '0.75rem 1rem' : '0.875rem 1.125rem',
                             border: message.sender === 'assistant'
-                                ? '1px solid rgba(255, 255, 255, 0.1)'
+                                ? '1px solid rgba(203, 213, 225, 0.5)'
                                 : 'none',
                             boxShadow: message.sender === 'user'
-                                ? '0 4px 12px rgba(0, 242, 255, 0.2)'
-                                : '0 4px 12px rgba(0, 0, 0, 0.2)'
+                                ? '0 8px 16px rgba(37, 99, 235, 0.2)'
+                                : '0 4px 10px rgba(0, 0, 0, 0.05)'
                         }}>
                             <p style={{
                                 margin: 0,
-                                color: message.sender === 'user' ? '#000' : '#fff',
+                                color: message.sender === 'user' ? 'white' : '#0f172a',
                                 fontSize: isMobile ? '0.875rem' : '0.9375rem',
                                 lineHeight: '1.5',
-                                fontWeight: message.sender === 'user' ? 600 : 400,
+                                fontWeight: message.sender === 'user' ? 500 : 400,
                                 wordWrap: 'break-word'
                             }}>
                                 {message.text}
                             </p>
                             <span style={{
                                 fontSize: isMobile ? '0.625rem' : '0.6875rem',
-                                color: message.sender === 'user' ? 'rgba(0,0,0,0.6)' : '#64748b',
+                                color: message.sender === 'user' ? 'rgba(255,255,255,0.7)' : '#64748b',
                                 marginTop: '0.25rem',
                                 display: 'block'
                             }}>
@@ -225,20 +230,20 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                             minWidth: isMobile ? '32px' : '36px',
                             height: isMobile ? '32px' : '36px',
                             borderRadius: '50%',
-                            background: 'rgba(255, 255, 255, 0.05)',
+                            background: 'rgba(241, 245, 249, 1)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            border: '1px solid rgba(203, 213, 225, 0.5)',
                             flexShrink: 0
                         }}>
-                            <Bot size={isMobile ? 16 : 18} color="#00f2ff" />
+                            <Bot size={isMobile ? 16 : 18} color="#2563eb" />
                         </div>
                         <div style={{
-                            background: 'rgba(255, 255, 255, 0.05)',
+                            background: 'rgba(241, 245, 249, 1)',
                             borderRadius: '18px 18px 18px 4px',
                             padding: isMobile ? '0.75rem 1rem' : '0.875rem 1.125rem',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            border: '1px solid rgba(203, 213, 225, 0.5)',
                             display: 'flex',
                             alignItems: 'center',
                             gap: '0.5rem'
@@ -248,7 +253,7 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                                     width: '7px',
                                     height: '7px',
                                     borderRadius: '50%',
-                                    background: '#00f2ff',
+                                    background: '#2563eb',
                                     animation: 'bounce 1.4s infinite ease-in-out both',
                                     animationDelay: '0s'
                                 }} />
@@ -256,7 +261,7 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                                     width: '7px',
                                     height: '7px',
                                     borderRadius: '50%',
-                                    background: '#00f2ff',
+                                    background: '#2563eb',
                                     animation: 'bounce 1.4s infinite ease-in-out both',
                                     animationDelay: '0.2s'
                                 }} />
@@ -264,13 +269,13 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                                     width: '7px',
                                     height: '7px',
                                     borderRadius: '50%',
-                                    background: '#00f2ff',
+                                    background: '#2563eb',
                                     animation: 'bounce 1.4s infinite ease-in-out both',
                                     animationDelay: '0.4s'
                                 }} />
                             </div>
                             <span style={{
-                                color: '#94a3b8',
+                                color: '#475569',
                                 fontSize: isMobile ? '0.8125rem' : '0.875rem'
                             }}>
                                 Generating SQL & fetching results...
@@ -286,8 +291,8 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
             <form
                 onSubmit={handleSubmit}
                 style={{
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                    background: 'rgba(248, 250, 252, 0.8)',
+                    borderTop: '1px solid rgba(203, 213, 225, 0.5)',
                     padding: isMobile ? '1rem 1.25rem' : '1.25rem 1.5rem',
                     backdropFilter: 'blur(10px)'
                 }}
@@ -311,21 +316,22 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                                 width: '100%',
                                 padding: isMobile ? '0.875rem 1rem' : '1rem 1.125rem',
                                 borderRadius: '20px',
-                                background: 'rgba(0, 0, 0, 0.4)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                color: '#fff',
+                                background: 'white',
+                                border: '1px solid #cbd5e1',
+                                color: '#0f172a',
                                 fontSize: isMobile ? '0.9375rem' : '1rem',
                                 outline: 'none',
                                 transition: 'all 0.3s ease',
-                                opacity: isLoading ? 0.6 : 1
+                                opacity: isLoading ? 0.6 : 1,
+                                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
                             }}
                             onFocus={(e) => {
-                                e.target.style.borderColor = 'rgba(0, 242, 255, 0.5)';
-                                e.target.style.boxShadow = '0 0 0 3px rgba(0, 242, 255, 0.1)';
+                                e.target.style.borderColor = '#2563eb';
+                                e.target.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.1)';
                             }}
                             onBlur={(e) => {
-                                e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                                e.target.style.boxShadow = 'none';
+                                e.target.style.borderColor = '#cbd5e1';
+                                e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)';
                             }}
                         />
                     </div>
@@ -339,21 +345,21 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                             height: isMobile ? '44px' : '48px',
                             borderRadius: '50%',
                             background: question.trim() && !isLoading
-                                ? 'linear-gradient(135deg, #00f2ff, #9d00ff)'
-                                : 'rgba(255, 255, 255, 0.1)',
+                                ? 'linear-gradient(135deg, #1e3a8a, #3b82f6)'
+                                : '#e2e8f0',
                             border: 'none',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             cursor: question.trim() && !isLoading ? 'pointer' : 'not-allowed',
                             transition: 'all 0.3s ease',
-                            opacity: question.trim() && !isLoading ? 1 : 0.5,
+                            opacity: question.trim() && !isLoading ? 1 : 0.7,
                             flexShrink: 0
                         }}
                         onMouseEnter={(e) => {
                             if (question.trim() && !isLoading) {
                                 e.currentTarget.style.transform = 'scale(1.05)';
-                                e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 242, 255, 0.3)';
+                                e.currentTarget.style.boxShadow = '0 8px 20px rgba(37, 99, 235, 0.3)';
                             }
                         }}
                         onMouseLeave={(e) => {
@@ -362,9 +368,9 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                         }}
                     >
                         {isLoading ? (
-                            <Loader2 size={isMobile ? 18 : 20} color="#000" className="animate-spin" />
+                            <Loader2 size={isMobile ? 18 : 20} color={question.trim() ? "white" : "#94a3b8"} className="animate-spin" />
                         ) : (
-                            <Send size={isMobile ? 18 : 20} color="#000" />
+                            <Send size={isMobile ? 18 : 20} color={question.trim() ? "white" : "#94a3b8"} />
                         )}
                     </button>
                 </div>
@@ -377,9 +383,9 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                         fontSize: isMobile ? '0.625rem' : '0.6875rem',
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
-                        color: 'rgba(255,255,255,0.3)'
+                        color: '#94a3b8'
                     }}>
-                        Ask • NQL-MySQL System converts to SQL • Executes securely
+                        Ask • BI System converts to SQL • Executes securely
                     </div>
                 )}
             </form>
@@ -414,16 +420,16 @@ export default function QueryInterface({ onRunQuery, isLoading }: QueryInterface
                 }
 
                 div::-webkit-scrollbar-track {
-                    background: rgba(255, 255, 255, 0.02);
+                    background: rgba(241, 245, 249, 1);
                 }
 
                 div::-webkit-scrollbar-thumb {
-                    background: rgba(255, 255, 255, 0.1);
+                    background: rgba(203, 213, 225, 1);
                     border-radius: 3px;
                 }
 
                 div::-webkit-scrollbar-thumb:hover {
-                    background: rgba(255, 255, 255, 0.2);
+                    background: rgba(148, 163, 184, 1);
                 }
             `}</style>
         </div>

@@ -7,20 +7,20 @@
 ========================= */
 
 :root {
-  --background: #020408;
-  --foreground: #ffffff;
-  --card-bg: rgba(255, 255, 255, 0.02);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --primary: #00f2ff;
-  --primary-glow: rgba(0, 242, 255, 0.3);
-  --secondary: #9d00ff;
-  --secondary-glow: rgba(157, 0, 255, 0.3);
-  --accent: #f0abfc;
-  --muted: rgba(255, 255, 255, 0.05);
-  --muted-foreground: #94a3b8;
-  --border: rgba(255, 255, 255, 0.1);
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(148, 163, 184, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(148, 163, 184, 0.2);
+  --primary: #1e3a8a;
+  --primary-glow: rgba(30, 58, 138, 0.2);
+  --secondary: #3b82f6;
+  --secondary-glow: rgba(59, 130, 246, 0.2);
+  --accent: #2563eb;
+  --muted: rgba(241, 245, 249, 1);
+  --muted-foreground: #64748b;
+  --border: rgba(203, 213, 225, 0.5);
   --radius-lg: 1.25rem;
   --radius-md: 0.75rem;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

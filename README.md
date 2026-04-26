@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 NLQ MySQL Frontend
 
-## Getting Started
+A modern, high-density React/Next.js interface for managing MySQL databases through natural language interaction.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Intuitive Query Interface**: Type what you want in plain English.
+- **Dynamic Data Visualization**: Real-time rendering of query results in interactive tables.
+- **Secure Connection Management**: Local-first credential handling.
+- **Live Schema Explorer**: Visualize your database structure at a glance.
+- **Glassmorphic Design**: Premium UI built with Tailwind CSS and Framer Motion.
+
+## 🏗️ Architecture Overview
+
+The frontend is built with **Next.js 15** using the **App Router**, focusing on component reusability and clean state management.
+
+### 📂 Directory Structure
+
+```text
+frontend/
+├── src/
+│   ├── app/                # Next.js App Router (Pages & Layouts)
+│   │   ├── dashboard/      # Main Application Interface
+│   │   ├── globals.css     # Global Design Tokens
+│   │   └── page.tsx        # Landing Page
+│   ├── components/         # Atomic UI Components
+│   │   ├── DatabaseConnectionForm.tsx # DB Auth Logic
+│   │   ├── QueryInterface.tsx        # NLQ Input & AI Feedback
+│   │   ├── ResultsTable.tsx          # Dynamic Data Grid
+│   │   ├── SchemaViewer.tsx          # Tree-view Schema
+│   │   └── nav.tsx                   # Interactive Navbar
+│   └── lib/                # Shared Utilities
+│       └── utils.ts        # Helper functions
+├── public/                 # Static Assets
+└── tailwind.config.js      # Custom Theme Configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Technical Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js 15+](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Data Fetching**: Native `fetch` API for REST communication.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔌 API Integration
 
-## Learn More
+The frontend communicates with the backend via RESTful endpoints. The core data flow follows:
 
-To learn more about Next.js, take a look at the following resources:
+1.  **Authentication**: Credentials sent to `/api/connect` -> Receive Schema.
+2.  **Querying**: Human Text + Schema sent to `/api/query` -> Receive SQL & Results.
+3.  **Local State**: Credentials and Schema are managed in the component state (pinned to `Dashboard` context).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Setup & Running
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  **Navigate to directory**: `cd frontend`
+2.  **Install dependencies**: `npm install`
+3.  **Environment Variables**: Create a `.env.local`:
+    ```env
+    NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+    ```
+4.  **Run Development Server**: `npm run dev`
+5.  **Build for Production**: `npm run build`
 
-## Deploy on Vercel
+## 🎨 Design Language
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Colors**: Deep Slate (#020617) backgrounds with Neon Cyan and Purple accents.
+- **Typography**: Responsive, high-readability sans-serif.
+- **Feedback**: Skeleton loaders and toast notifications for asynchronous state changes.

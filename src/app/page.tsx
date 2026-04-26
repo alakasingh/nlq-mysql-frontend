@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { ArrowRight, Cpu, Sparkles, Database, Shield, Zap, Terminal } from "lucide-react";
+import { ArrowRight, Cpu, Sparkles, Database, Shield, Zap, Terminal, BarChart2 } from "lucide-react";
 import { ReactNode } from "react";
 import Navbar from "@/components/nav";
 
@@ -12,18 +12,16 @@ interface FeatureCardProps {
   borderColor: string;
 }
 
-
-
 export default function Home() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(to bottom right, #020617, #0f172a, #020617)',
-      color: 'white',
+      background: 'linear-gradient(to bottom right, #f8fafc, #ffffff, #f1f5f9)',
+      color: '#0f172a',
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs (Light Blue/Indigo) */}
       <div style={{ position: 'fixed', inset: 0, zIndex: -10, pointerEvents: 'none', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute',
@@ -31,7 +29,7 @@ export default function Home() {
           left: '25%',
           width: '384px',
           height: '384px',
-          background: 'rgba(6, 182, 212, 0.2)',
+          background: 'rgba(37, 99, 235, 0.08)',
           borderRadius: '50%',
           filter: 'blur(80px)',
           animation: 'pulse 4s ease-in-out infinite'
@@ -42,7 +40,7 @@ export default function Home() {
           right: '25%',
           width: '384px',
           height: '384px',
-          background: 'rgba(139, 92, 246, 0.2)',
+          background: 'rgba(59, 130, 246, 0.08)',
           borderRadius: '50%',
           filter: 'blur(80px)',
           animation: 'pulse 6s ease-in-out infinite',
@@ -54,7 +52,7 @@ export default function Home() {
           left: '50%',
           width: '384px',
           height: '384px',
-          background: 'rgba(217, 70, 239, 0.1)',
+          background: 'rgba(14, 165, 233, 0.08)',
           borderRadius: '50%',
           filter: 'blur(80px)',
           animation: 'pulse 5s ease-in-out infinite',
@@ -68,15 +66,15 @@ export default function Home() {
         inset: 0,
         zIndex: -10,
         pointerEvents: 'none',
-        opacity: 0.2,
-        backgroundImage: `linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px)`,
+        opacity: 0.4,
+        backgroundImage: `linear-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.2) 1px, transparent 1px)`,
         backgroundSize: '64px 64px'
       }} />
 
       <style jsx>{`
         @keyframes pulse {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50% { opacity: 0.3; transform: scale(1.05); }
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.05); }
         }
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
@@ -90,20 +88,17 @@ export default function Home() {
 
       {/* Navigation */}
       <Navbar />
-   
 
       {/* Main Content */}
       <main style={{
         position: 'relative',
         maxWidth: '1280px',
         margin: '0 auto',
-        
-        padding: '10rem 2rem 8rem',
+        padding: '6rem 2rem 4rem',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
-        
       }}>
         {/* Badge */}
         <div className="animate-fade" style={{
@@ -113,30 +108,31 @@ export default function Home() {
           padding: '0.5rem 1rem',
           marginBottom: '2rem',
           borderRadius: '9999px',
-          border: '1px solid rgba(6, 182, 212, 0.3)',
-          background: 'rgba(6, 182, 212, 0.1)',
+          border: '1px solid rgba(37, 99, 235, 0.2)',
+          background: 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(12px)',
-          boxShadow: '0 10px 40px rgba(6, 182, 212, 0.2)'
+          boxShadow: '0 4px 15px rgba(37, 99, 235, 0.05)'
         }}>
-          <Sparkles size={14} style={{ color: '#22d3ee' }} fill="currentColor" />
+          <Sparkles size={14} style={{ color: '#2563eb' }} fill="currentColor" />
           <span style={{
             fontSize: '0.75rem',
             fontWeight: 700,
             letterSpacing: '0.1em',
-            color: '#67e8f9'
+            color: '#1e3a8a'
           }}>
-            NEXT GEN DATA ANALYSIS
+            ENTERPRISE BUSINESS QUERY
           </span>
         </div>
 
         {/* Hero Title */}
         <h1 className="animate-fade" style={{
-          fontSize: 'clamp(3rem, 8vw, 6rem)',
+          fontSize: 'clamp(3rem, 8vw, 5.5rem)',
           fontWeight: 900,
           letterSpacing: '-0.05em',
           marginBottom: '2rem',
           maxWidth: '1200px',
-          lineHeight: 1.1
+          lineHeight: 1.1,
+          color: '#0f172a'
         }}>
           Talk to your{' '}
           <span style={{
@@ -144,12 +140,12 @@ export default function Home() {
             display: 'inline-block'
           }}>
             <span style={{
-              background: 'linear-gradient(to right, #22d3ee, #a78bfa, #e879f9)',
+              background: 'linear-gradient(to right, #1e3a8a, #3b82f6)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text'
             }}>
-              MySQL
+              MySQL 
             </span>
           </span>
           {' '}Data.
@@ -158,13 +154,13 @@ export default function Home() {
         {/* Subtitle */}
         <p className="animate-fade-1" style={{
           fontSize: '1.25rem',
-          color: '#94a3b8',
+          color: '#475569',
           marginBottom: '3rem',
           maxWidth: '672px',
           lineHeight: 1.75
         }}>
           The first AI-native database interface that translates your human questions into complex SQL, instantly.
-          No more manual queries, just answers.
+           No more manual queries, just answers.
         </p>
 
         {/* CTA Buttons */}
@@ -180,11 +176,11 @@ export default function Home() {
             position: 'relative',
             padding: '1rem 3rem',
             borderRadius: '9999px',
-            background: 'linear-gradient(to right, #06b6d4, #7c3aed)',
+            background: 'linear-gradient(to right, #1e3a8a, #3b82f6)',
             color: 'white',
             fontWeight: 700,
             fontSize: '1.125rem',
-            boxShadow: '0 20px 60px rgba(6, 182, 212, 0.5)',
+            boxShadow: '0 10px 30px rgba(37, 99, 235, 0.3)',
             transition: 'all 0.3s',
             display: 'flex',
             alignItems: 'center',
@@ -193,22 +189,22 @@ export default function Home() {
           }}
           onMouseOver={e => {
             e.currentTarget.style.transform = 'scale(1.05)';
-            e.currentTarget.style.boxShadow = '0 20px 70px rgba(6, 182, 212, 0.7)';
+            e.currentTarget.style.boxShadow = '0 15px 40px rgba(37, 99, 235, 0.4)';
           }}
           onMouseOut={e => {
             e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 20px 60px rgba(6, 182, 212, 0.5)';
+            e.currentTarget.style.boxShadow = '0 10px 30px rgba(37, 99, 235, 0.3)';
           }}>
-            <span>Launch Dashboard</span>
+            <span>Get Started</span>
             <ArrowRight size={20} />
           </a>
           <button style={{
             padding: '1rem 3rem',
             borderRadius: '9999px',
-            border: '2px solid #334155',
-            background: 'rgba(15, 23, 42, 0.5)',
+            border: '2px solid #cbd5e1',
+            background: 'rgba(255, 255, 255, 0.8)',
             backdropFilter: 'blur(12px)',
-            color: 'white',
+            color: '#0f172a',
             fontWeight: 700,
             fontSize: '1.125rem',
             transition: 'all 0.3s',
@@ -218,15 +214,17 @@ export default function Home() {
             cursor: 'pointer'
           }}
           onMouseOver={e => {
-            e.currentTarget.style.borderColor = 'rgba(6, 182, 212, 0.5)';
-            e.currentTarget.style.background = 'rgba(30, 41, 59, 0.5)';
+            e.currentTarget.style.borderColor = '#94a3b8';
+            e.currentTarget.style.background = 'white';
+            e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.05)';
           }}
           onMouseOut={e => {
-            e.currentTarget.style.borderColor = '#334155';
-            e.currentTarget.style.background = 'rgba(15, 23, 42, 0.5)';
+            e.currentTarget.style.borderColor = '#cbd5e1';
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.8)';
+            e.currentTarget.style.boxShadow = 'none';
           }}>
             <span>View Live Demo</span>
-            <Terminal size={20} />
+            <BarChart2 size={20} />
           </button>
         </div>
 
@@ -238,25 +236,25 @@ export default function Home() {
           width: '100%'
         }}>
           <FeatureCard
-            icon={<Zap size={32} style={{ color: '#facc15' }} />}
-            title="Instant Results"
-            description="Complex SQL generation in milliseconds using tuned LLM models."
-            gradient="linear-gradient(to bottom right, rgba(234, 179, 8, 0.1), rgba(249, 115, 22, 0.1))"
-            borderColor="rgba(234, 179, 8, 0.2)"
+            icon={<Zap size={32} style={{ color: '#d97706' }} />}
+            title="Instant NLP to SQL"
+            description="Generate complex analytical queries in milliseconds using tuned LLM models."
+            gradient="linear-gradient(to bottom right, rgba(255, 255, 255, 1), rgba(248, 250, 252, 1))"
+            borderColor="rgba(203, 213, 225, 0.5)"
           />
           <FeatureCard
-            icon={<Shield size={32} style={{ color: '#34d399' }} />}
+            icon={<Shield size={32} style={{ color: '#059669' }} />}
             title="Enterprise Secure"
-            description="Your credentials stay local. We only process schema and questions."
-            gradient="linear-gradient(to bottom right, rgba(16, 185, 129, 0.1), rgba(34, 197, 94, 0.1))"
-            borderColor="rgba(16, 185, 129, 0.2)"
+            description="Your credentials stay local. We only process schema and questions securely."
+            gradient="linear-gradient(to bottom right, rgba(255, 255, 255, 1), rgba(248, 250, 252, 1))"
+            borderColor="rgba(203, 213, 225, 0.5)"
           />
           <FeatureCard
-            icon={<Database size={32} style={{ color: '#22d3ee' }} />}
+            icon={<Database size={32} style={{ color: '#2563eb' }} />}
             title="Full Schema Support"
             description="Automatic relationship detection and comprehensive schema exploration."
-            gradient="linear-gradient(to bottom right, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1))"
-            borderColor="rgba(6, 182, 212, 0.2)"
+            gradient="linear-gradient(to bottom right, rgba(255, 255, 255, 1), rgba(248, 250, 252, 1))"
+            borderColor="rgba(203, 213, 225, 0.5)"
           />
         </div>
       </main>
@@ -265,14 +263,14 @@ export default function Home() {
       <footer style={{
         position: 'relative',
         padding: '2rem',
-        borderTop: '1px solid rgba(51, 65, 85, 0.5)',
+        borderTop: '1px solid rgba(203, 213, 225, 0.5)',
         textAlign: 'center',
         color: '#64748b',
         fontSize: '0.75rem',
         fontWeight: 600,
         letterSpacing: '0.05em'
       }}>
-        &copy; 2026 NLQ MySQL AI. Proudly built for the future of data.
+        &copy; 2026 OpenDB. Enterprise Business Query.
       </footer>
     </div>
   );
@@ -289,7 +287,6 @@ function FeatureCard({
 
   return (
     <div
-     className=''
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -299,22 +296,16 @@ function FeatureCard({
         border: `1px solid ${borderColor}`,
         background: gradient,
         backdropFilter: 'blur(12px)',
-        transition: 'transform 0.3s',
+        transition: 'all 0.3s',
         textAlign: 'left',
         overflow: 'hidden',
-        transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+        boxShadow: isHovered ? '0 20px 40px rgba(0, 0, 0, 0.05)' : '0 4px 6px rgba(0, 0, 0, 0.02)',
+        transform: isHovered ? 'scale(1.02)' : 'scale(1)'
       }}
     > 
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.03), transparent)',
-        opacity: isHovered ? 1 : 0,
-        transition: 'opacity 0.3s'
-      }} />
       <div style={{ position: 'relative' }}>
         <div style={{
-          background: 'rgba(30, 41, 59, 0.5)',
+          background: 'rgba(241, 245, 249, 1)',
           width: '4rem',
           height: '4rem',
           borderRadius: '1rem',
@@ -323,7 +314,7 @@ function FeatureCard({
           justifyContent: 'center',
           marginBottom: '1.5rem',
           transition: 'transform 0.3s',
-          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
           transform: isHovered ? 'scale(1.1) rotate(3deg)' : 'scale(1) rotate(0deg)'
         }}>
           {icon}
@@ -331,14 +322,14 @@ function FeatureCard({
         <h3 style={{
           fontSize: '1.25rem',
           fontWeight: 700,
-          color: 'white',
+          color: '#0f172a',
           marginBottom: '0.75rem',
           letterSpacing: '-0.025em'
         }}>
           {title}
         </h3>
         <p style={{
-          color: '#94a3b8',
+          color: '#475569',
           fontSize: '0.875rem',
           lineHeight: 1.75
         }}>

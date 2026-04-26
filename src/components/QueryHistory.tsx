@@ -29,18 +29,18 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
             }}>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
                     <div style={{
-                        background: 'rgba(99,102,241,0.15)',
+                        background: 'rgba(37, 99, 235, 0.1)',
                         padding: 12,
                         borderRadius: 14
                     }}>
-                        <History size={24} color="#818cf8" />
+                        <History size={24} color="#2563eb" />
                     </div>
                     <div>
                         <h2 style={{
                             margin: 0,
                             fontSize: 24,
                             fontWeight: 800,
-                            color: '#fff'
+                            color: '#0f172a'
                         }}>
                             Query Timeline
                         </h2>
@@ -49,7 +49,7 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                             fontSize: 10,
                             letterSpacing: 2,
                             textTransform: 'uppercase',
-                            color: '#94a3b8'
+                            color: '#64748b'
                         }}>
                             Previous Inquiries
                         </p>
@@ -69,10 +69,19 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                             textTransform: 'uppercase',
                             padding: '8px 14px',
                             borderRadius: 999,
-                            background: 'rgba(239,68,68,0.1)',
-                            border: '1px solid rgba(239,68,68,0.25)',
-                            color: '#f87171',
-                            cursor: 'pointer'
+                            background: 'rgba(239, 68, 68, 0.1)',
+                            border: '1px solid rgba(239, 68, 68, 0.2)',
+                            color: '#ef4444',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s'
+                        }}
+                        onMouseOver={e => {
+                            e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)';
+                            e.currentTarget.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                        }}
+                        onMouseOut={e => {
+                            e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)';
+                            e.currentTarget.style.border = '1px solid rgba(239, 68, 68, 0.2)';
                         }}
                     >
                         <Trash2 size={14} />
@@ -87,12 +96,15 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                     <div
                         key={item.id}
                         style={{
-                            background: 'rgba(255,255,255,0.03)',
-                            border: '1px solid rgba(255,255,255,0.08)',
+                            background: 'white',
+                            border: '1px solid rgba(203, 213, 225, 0.5)',
                             borderRadius: 20,
                             padding: 24,
-                            transition: 'all 0.3s ease'
+                            transition: 'all 0.3s ease',
+                            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.02)'
                         }}
+                        onMouseOver={e => e.currentTarget.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.05)'}
+                        onMouseOut={e => e.currentTarget.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.02)'}
                     >
                         {/* Meta */}
                         <div style={{
@@ -109,7 +121,7 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                         <p style={{
                             fontSize: 18,
                             fontWeight: 700,
-                            color: '#fff',
+                            color: '#0f172a',
                             lineHeight: 1.4,
                             marginBottom: 20
                         }}>
@@ -119,13 +131,13 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                         {/* SQL */}
                         <div style={{
                             position: 'relative',
-                            background: '#020617',
+                            background: '#f8fafc',
                             borderRadius: 14,
-                            border: '1px solid rgba(255,255,255,0.08)',
+                            border: '1px solid rgba(203, 213, 225, 0.5)',
                             padding: 16,
                             fontFamily: 'monospace',
                             fontSize: 12,
-                            color: '#a5b4fc',
+                            color: '#1e3a8a',
                             overflowX: 'auto'
                         }}>
                             <div style={{
@@ -135,7 +147,8 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                                 fontSize: 9,
                                 letterSpacing: 2,
                                 textTransform: 'uppercase',
-                                color: 'rgba(255,255,255,0.2)'
+                                color: '#94a3b8',
+                                fontWeight: 700
                             }}>
                                 SQL
                             </div>
@@ -156,12 +169,22 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                                     gap: 8,
                                     padding: '10px 18px',
                                     borderRadius: 14,
-                                    background: '#6366f1',
-                                    color: '#020617',
+                                    background: 'linear-gradient(to right, #1e3a8a, #3b82f6)',
+                                    color: 'white',
                                     fontSize: 12,
                                     fontWeight: 800,
                                     cursor: 'pointer',
-                                    border: 'none'
+                                    border: 'none',
+                                    transition: 'transform 0.2s, box-shadow 0.2s',
+                                    boxShadow: '0 4px 10px rgba(37, 99, 235, 0.2)'
+                                }}
+                                onMouseOver={e => {
+                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                    e.currentTarget.style.boxShadow = '0 6px 15px rgba(37, 99, 235, 0.3)';
+                                }}
+                                onMouseOut={e => {
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                    e.currentTarget.style.boxShadow = '0 4px 10px rgba(37, 99, 235, 0.2)';
                                 }}
                             >
                                 <Play size={14} fill="currentColor" />
@@ -177,32 +200,34 @@ export default function QueryHistory({ history, onClear, onRunAgain }: QueryHist
                         padding: 80,
                         textAlign: 'center',
                         borderRadius: 24,
-                        border: '2px dashed rgba(255,255,255,0.1)',
-                        background: 'rgba(255,255,255,0.02)'
+                        border: '2px dashed rgba(203, 213, 225, 0.5)',
+                        background: 'rgba(248, 250, 252, 1)'
                     }}>
                         <div style={{
                             width: 80,
                             height: 80,
                             borderRadius: '50%',
-                            background: 'rgba(255,255,255,0.05)',
+                            background: 'white',
+                            border: '1px solid rgba(203, 213, 225, 0.5)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            margin: '0 auto 24px'
+                            margin: '0 auto 24px',
+                            boxShadow: '0 4px 10px rgba(0,0,0,0.02)'
                         }}>
-                            <History size={40} color="rgba(255,255,255,0.2)" />
+                            <History size={40} color="#cbd5e1" />
                         </div>
                         <h3 style={{
                             fontSize: 22,
                             fontWeight: 800,
-                            color: 'rgba(255,255,255,0.25)',
+                            color: '#475569',
                             marginBottom: 12
                         }}>
                             No History Yet
                         </h3>
                         <p style={{
                             fontSize: 14,
-                            color: 'rgba(148,163,184,0.5)',
+                            color: '#94a3b8',
                             maxWidth: 360,
                             margin: '0 auto'
                         }}>
@@ -226,11 +251,11 @@ function MetaBadge({ icon, text }: { icon: any; text: string }) {
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: 1,
-            color: '#94a3b8',
-            background: 'rgba(255,255,255,0.05)',
+            color: '#64748b',
+            background: 'rgba(241, 245, 249, 1)',
             padding: '6px 10px',
             borderRadius: 10,
-            border: '1px solid rgba(255,255,255,0.08)'
+            border: '1px solid rgba(203, 213, 225, 0.5)'
         }}>
             {icon}
             {text}
