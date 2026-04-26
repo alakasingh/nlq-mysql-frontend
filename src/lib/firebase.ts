@@ -2,12 +2,12 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCxbX32r02TD6r-V8-ePeKaqnLZ1VzpIpw",
-  authDomain: "opendb-a9f2f.firebaseapp.com",
-  projectId: "opendb-a9f2f",
-  storageBucket: "opendb-a9f2f.firebasestorage.app",
-  messagingSenderId: "81197125343",
-  appId: "1:81197125343:web:8a17e26d29d76ebed3a36a"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 // Initialize Firebase only if it hasn't been initialized already
